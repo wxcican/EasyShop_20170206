@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background"
+    android:layout_margin="@dimen/dp_10"
+    android:orientation="vertical"
+    android:padding="@dimen/dp_10"
+    tools:ignore="Overdraw">
+
+    <Button
+        android:id="@+id/btn_popu_album"
+        style="@style/AppTheme.Button.EasyShop"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:text="@string/popu_album" />
+
+    <Button
+        android:id="@+id/btn_popu_camera"
+        style="@style/AppTheme.Button.EasyShop"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:text="@string/popu_camear" />
+
+    <Button
+        android:id="@+id/btn_popu_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:layout_marginTop="@dimen/dp_6"
+        android:text="@string/popu_cancle"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_20" />
+
+</LinearLayout>
+

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_household"
+        android:title="@string/menu_household" />
+    <item
+        android:id="@+id/menu_electron"
+        android:title="@string/menu_electron" />
+    <item
+        android:id="@+id/menu_dress"
+        android:title="@string/menu_dress" />
+    <item
+        android:id="@+id/menu_toy"
+        android:title="@string/menu_toy" />
+    <item
+        android:id="@+id/menu_book"
+        android:title="@string/menu_book" />
+    <item
+        android:id="@+id/menu_gift"
+        android:title="@string/menu_gift" />
+    <item
+        android:id="@+id/menu_other"
+        android:title="@string/menu_other" />
+
+
+</menu>

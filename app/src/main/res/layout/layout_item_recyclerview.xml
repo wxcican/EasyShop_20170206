@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_photo"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="3dp">
+
+    <ImageView
+        android:id="@+id/iv_photo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@+id/bg"
+        android:layout_alignLeft="@+id/bg"
+        android:layout_alignRight="@+id/bg"
+        android:layout_alignTop="@+id/bg"
+        android:scaleType="centerCrop" />
+
+    <ImageView
+        android:id="@+id/bg"
+        android:layout_width="@dimen/dp_90"
+        android:layout_height="@dimen/dp_90"
+        android:src="@drawable/photo_bg"
+        android:visibility="invisible" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@+id/bg"
+        android:layout_alignLeft="@+id/bg"
+        android:layout_alignRight="@+id/bg"
+        android:layout_alignTop="@+id/bg">
+
+        <CheckBox
+            android:id="@+id/cb_check_photo"
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="@dimen/dp_25"
+            android:layout_gravity="top|right"
+            android:layout_margin="5dp"
+            android:background="@drawable/selector_alert_checkbox"
+            android:button="@null"
+            android:visibility="gone" />
+    </FrameLayout>
+
+
+</RelativeLayout>

@@ -1,3 +1,78 @@
 <resources>
-    <string name="app_name">EasyShop_20170206</string>
+    <string name="app_name">易淘</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title_login">登录</string>
+    <string name="title_register">注册</string>
+    <string name="username">用户名</string>
+    <string name="password">密码</string>
+    <string name="pwd_again">确认密码</string>
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="fast_register">快速注册</string>
+    <string name="username_pwd_rule">用户名或密码</string>
+    <string name="OK">确定</string>
+    <string name="login_out">退出当前登录</string>
+    <string name="login_register">登录|注册</string>
+    <string name="no_login">还未登录,请在我的页面登录</string>
+
+    <string name="password_rules">密码以数字或字母开头，长度在6~18之间，只能包含字符、数字和下划线</string>
+    <string name="username_rules">账号为中文，字母或数字，长度为4~20，一个中文算2个长度</string>
+    <string name="nickname_rules">昵称为中文，字母或数字，长度为1~12，一个中文算2个长度</string>
+    <string name="username_equal_pwd">两次输入的密码不同！</string>
+    <string name="username_update">用户名作为登录名不可以修改~</string>
+    <string name="id_update">环信ID不可以修改~</string>
+    <string name="nickname_update">昵称修改</string>
+
+    <string name="main_shop">市场</string>
+    <string name="main_message">消息</string>
+    <string name="main_mail_list">通讯录</string>
+    <string name="main_me">我的</string>
+
+    <string name="goods_name">名称:</string>
+    <string name="goods_price">价格:</string>
+    <string name="goods_type">类别:</string>
+    <string name="goods_name_hint">商品的名称</string>
+    <string name="goods_price_hint">价格(￥)</string>
+    <string name="goods_type_check">类型选择</string>
+    <string name="goods_describe">请输入商品的描述,200字以内……</string>
+    <string name="goods_delete">删除</string>
+    <string name="goods_upload">上传</string>
+    <string name="goods_phone">图片详情</string>
+    <string name="goods_details">商品详情</string>
+
+    <string name="goods_title_delete">商品删除</string>
+    <string name="goods_info_delete">是否删除该商品？</string>
+
+    <string name="goods_money">%s￥</string>
+    <string name="goods_detail_master">发布者:%s</string>
+    <string name="goods_detail_message">发消息</string>
+    <string name="goods_detail_call">联系他</string>
+
+    <string name="load_more_error">加载时发生错误-_-!</string>
+    <string name="load_more_end">没有更多数据</string>
+    <string name="load_more_empty">你没有上传过该类商品</string>
+    <string name="refresh_more_end">没有新的商品了！</string>
+    <string name="goods_overdue">商品过期不存在</string>
+    <string name="goods_delete_master">商品可能已经让他的主人删除了！</string>
+
+    <string name="me_person_info">个人信息</string>
+    <string name="me_person_goods">我的商品</string>
+    <string name="me_goods_upload">上传商品</string>
+
+    <string name="nickname">昵称</string>
+    <string name="hx_id">环信ID</string>
+    <string name="popu_album">相册</string>
+    <string name="popu_camear">相机</string>
+    <string name="popu_cancle">取消</string>
+    <string name="nickname_info">1.通过昵称添加好友,没有昵称无法添加好友 \n2.此昵称非用户名,在联系人和市场等场景显示</string>
+
+    <string name="menu_household">家用</string>
+    <string name="menu_electron">电子</string>
+    <string name="menu_dress">服饰</string>
+    <string name="menu_toy">玩具</string>
+    <string name="menu_book">图书</string>
+    <string name="menu_gift">礼品</string>
+    <string name="menu_other">其它</string>
 </resources>
