@@ -16,6 +16,8 @@ import com.fuicuiedu.xc.easyshop_20170206.commons.ActivityUtils;
 import com.fuicuiedu.xc.easyshop_20170206.main.me.MeFragment;
 import com.fuicuiedu.xc.easyshop_20170206.main.shop.ShopFragment;
 
+import org.w3c.dom.Text;
+
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
@@ -83,12 +85,16 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             switch (position) {
+                //市场
                 case 0:
                     return new ShopFragment();
+                //消息
                 case 1:
                     return new UnLoginFragment();
+                //通讯录
                 case 2:
                     return new UnLoginFragment();
+                //我的
                 case 3:
                     return new MeFragment();
             }

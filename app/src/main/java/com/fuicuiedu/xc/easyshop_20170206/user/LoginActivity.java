@@ -46,15 +46,17 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void init() {
-        //给左上角加一个返回图标，需要重写菜单点击事件，否则点击无效
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //给EditText添加监听
         et_userName.addTextChangedListener(textWatcher);
         et_pwd.addTextChangedListener(textWatcher);
+
+        //给左上角加一个返回图标
+        setSupportActionBar(toolbar);
+        //设置为ture，显示返回图标，但是点击效果需要实现菜单点击事件
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    //给左上角加一个返回图标，需要重写菜单点击事件，否则点击无效
+    //设置为ture，显示返回图标，但是点击效果需要实现菜单点击事件
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //如果点击的是返回键，则finish

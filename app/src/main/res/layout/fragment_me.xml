@@ -13,20 +13,20 @@
         android:orientation="vertical"
         android:background="?attr/colorPrimaryDark">
 
-        <!--<com.pkmmte.view.CircularImageView-->
-            <!--android:id="@+id/iv_user_head"-->
-            <!--android:layout_width="120dp"-->
-            <!--android:layout_height="120dp"-->
-            <!--android:scaleType="centerInside"-->
-            <!--android:src="@drawable/user_ico"-->
-            <!--app:border="true"-->
-            <!--app:border_color="#16f5f5f5"-->
-            <!--app:border_width="6dp"-->
-            <!--app:selector="true"-->
-            <!--app:selector_color="#4D000000"-->
-            <!--app:selector_stroke_color="#16f5f5f5"-->
-            <!--app:selector_stroke_width="6dp"-->
-            <!--app:shadow="false"  />-->
+        <com.pkmmte.view.CircularImageView
+            android:id="@+id/iv_user_head"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/user_ico"
+            app:border="true"
+            app:border_color="#16f5f5f5"
+            app:border_width="6dp"
+            app:selector="true"
+            app:selector_color="#4D000000"
+            app:selector_stroke_color="#16f5f5f5"
+            app:selector_stroke_width="6dp"
+            app:shadow="false"  />
 
         <TextView
             android:id="@+id/tv_login"
