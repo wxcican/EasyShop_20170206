@@ -16,6 +16,7 @@ import com.fuicuiedu.xc.easyshop_20170206.commons.ActivityUtils;
 import com.fuicuiedu.xc.easyshop_20170206.commons.LogUtils;
 import com.fuicuiedu.xc.easyshop_20170206.commons.RegexUtils;
 import com.fuicuiedu.xc.easyshop_20170206.components.ProgressDialogFragment;
+import com.fuicuiedu.xc.easyshop_20170206.network.EasyShopClient;
 
 
 import org.json.JSONException;
@@ -114,57 +115,18 @@ public class RegisterActivity extends AppCompatActivity {
             activityUtils.showToast(R.string.username_equal_pwd);
             return;
         }
-        activityUtils.showToast("执行注册的网络请求");
 
-//                1.创建客户端
-//                2.构建请求
-//                    2.1 添加url（服务器地址，接口）
-//                    2.2 添加请求方式（get,post）
-//                    2.3 添加请求头（根据服务器的要求来添加，通常不需要）
-//                    2.4 添加请求体（可以为空）
-//                3.客户端发送请求给服务器 -> 响应
-//                4.解析响应
-//                    4.1 判断是否连接成功（判断响应码）
-//                    4.2 如果响应码是200 - 299 -> 取出响应体（解析，展示）
-
-//        1.创建客户端
-        //日志拦截器
-        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
-        //设置级别（输出行头体）
-        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                //添加日志拦截器
-                .addInterceptor(httpLoggingInterceptor)
-                .build();
-//        2.构建请求
-//        //请求体
-        RequestBody requestBody = new FormBody.Builder()
-                .add("username",username)
-                .add("password",password)
-                .build();
-
-        Request request = new Request.Builder()
-                .url("http://wx.feicuiedu.com:9094/yitao/UserWeb?method=register")
-                .post(requestBody)
-                .build();
-//        3.客户端执行请求(推荐异步回调)
-        okHttpClient.newCall(request).enqueue(new Callback() {
+        Call call = EasyShopClient.getInstance().register(username,password);
+        call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                //超时或没有网络连接
-                //注意：这里是后台线程！
+
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                //网络连接成功
-                //注意：这里是后台线程！
+
             }
         });
-
-
-
-
     }
 }
