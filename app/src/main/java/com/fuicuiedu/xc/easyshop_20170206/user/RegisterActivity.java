@@ -28,10 +28,13 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -125,18 +128,21 @@ public class RegisterActivity extends AppCompatActivity {
 //                    4.2 如果响应码是200 - 299 -> 取出响应体（解析，展示）
 
 //        1.创建客户端
-        OkHttpClient okHttpClient = new OkHttpClient();
+        //日志拦截器
+        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
+        //设置级别（输出行头体）
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                //添加日志拦截器
+                .addInterceptor(httpLoggingInterceptor)
+                .build();
 //        2.构建请求
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("username",username);
-            jsonObject.put("password",password);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        String json = jsonObject.toString();
-        //请求体
-        RequestBody requestBody = RequestBody.create(null,json);
+//        //请求体
+        RequestBody requestBody = new FormBody.Builder()
+                .add("username",username)
+                .add("password",password)
+                .build();
 
         Request request = new Request.Builder()
                 .url("http://wx.feicuiedu.com:9094/yitao/UserWeb?method=register")
@@ -148,14 +154,12 @@ public class RegisterActivity extends AppCompatActivity {
             public void onFailure(Call call, IOException e) {
                 //超时或没有网络连接
                 //注意：这里是后台线程！
-                LogUtils.e("网络连接失败");
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                //成功
+                //网络连接成功
                 //注意：这里是后台线程！
-                LogUtils.e("请求成功");
             }
         });
 
