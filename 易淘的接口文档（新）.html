@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>易淘的接口文档（新）</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>易淘接口文档</h1>
+<ul>
+<li>服务器地址：http://wx.feicuiedu.com:9094/yitao/</li>
+</ul>
+<h2>用户模块</h2>
+<h3>用户接口根路径</h3>
+<h3>1.登录</h3>
+<p><em>路径：</em> <code>UserWeb?method=login</code></p>
+<p><em>方法：</em> <code>post</code></p>
+<p><em>请求：</em> </p>
+<pre><code>//表单
+username=&quot;....&quot;
+password=&quot;....&quot;
+</code></pre>
+
+<p><em>响应体：</em></p>
+<pre><code>//成功
+{
+&quot;code&quot;: 1,
+&quot;msg&quot;: &quot;succeed&quot;,
+&quot;data&quot;: {
+    &quot;username&quot;: &quot;xc01&quot;,
+    &quot;other&quot;: &quot;/images/35C69D35E4164D19B4278DC45FDCAF45/2D505F81BB.jpg&quot;,
+    &quot;nickname&quot;: &quot;666&quot;,
+    &quot;name&quot;: &quot;yt0186129caad847a98a71189fda4f2300&quot;,
+    &quot;uuid&quot;: &quot;35C69D35E4164D19B4278DC45FDCAF45&quot;,
+    &quot;password&quot;: &quot;123456&quot;
+}
+</code></pre>
+
+<p>}
+	//失败
+	{
+	    &quot;code&quot;: 2,
+	    &quot;msg&quot;: &quot;failed&quot;
+	}</p>
+<h3>2.注册</h3>
+<p><em>路径：</em> <code>UserWeb?method=register</code></p>
+<p><em>方法：</em> <code>post</code></p>
+<p><em>请求：</em> </p>
+<pre><code>//表单
+username=&quot;....&quot;
+password=&quot;....&quot;
+</code></pre>
+
+<p><em>响应体：</em></p>
+<pre><code>//成功
+{
+    {
+    &quot;code&quot;: 1,
+    &quot;msg&quot;: &quot;succeed&quot;,
+    &quot;data&quot;: {
+        &quot;username&quot;: &quot;xc62&quot;,
+        &quot;name&quot;: &quot;yt59856b15cf394e7b84a7d48447d16098&quot;,
+        &quot;uuid&quot;: &quot;0F8EC12223174657B2E842076D54C361&quot;,
+        &quot;password&quot;: &quot;123456&quot;
+    }
+}
+//失败
+{
+    &quot;code&quot;: 2,
+    &quot;msg&quot;: &quot;failed&quot;
+}
+</code></pre>
+
+<h3>3.修改昵称</h3>
+<p><em>路径：</em> <code>UserWeb?method=update</code></p>
+<p><em>方法：</em> <code>post</code>/<code>multipart</code></p>
+<p><em>请求：</em> </p>
+<p>需要传一个修改完昵称用户类，注意需要转换为<strong>JSON字符串</strong></p>
+<pre><code>{
+    &quot;name&quot;: &quot;yt59856b15cf394e7b84a7d48447d16098&quot;,
+    &quot;username&quot;: &quot;xc62&quot;,
+    &quot;nickname&quot;: &quot;555&quot;,
+    &quot;password&quot;: &quot;123456&quot;,
+    &quot;uuid&quot;: &quot;0F8EC12223174657B2E842076D54C361&quot;
+}
+</code></pre>
+
+<p><em>响应体：</em></p>
+<pre><code>//成功
+{
+    &quot;code&quot;: 1,
+    &quot;msg&quot;: &quot;success&quot;,
+    &quot;data&quot;: {
+        &quot;username&quot;: &quot;xc62&quot;,
+        &quot;nickname&quot;: &quot;555&quot;,
+        &quot;name&quot;: &quot;yt59856b15cf394e7b84a7d48447d16098&quot;,
+        &quot;uuid&quot;: &quot;0F8EC12223174657B2E842076D54C361&quot;,
+        &quot;password&quot;: &quot;123456&quot;
+    }
+}
+
+//失败
+{
+    &quot;code&quot;: 2,
+    &quot;msg&quot;: &quot;failed&quot;
+}
+</code></pre>
+
+<h3>4.修改头像</h3>
+<p><em>路径：</em> <code>UserWeb?method=update</code></p>
+<p><em>方法：</em> <code>post</code>/<code>multipart</code></p>
+<p><em>请求：</em> </p>
+<p>需要传一个用户类<strong>JSON字符串</strong>格式，并且上传<strong>头像文件</strong></p>
+<p><em>响应体：</em></p>
+<pre><code>//成功
+{
+    &quot;code&quot;: 1,
+    &quot;msg&quot;: &quot;success&quot;,
+    &quot;data&quot;: {
+        &quot;username&quot;: &quot;xc62&quot;,
+        &quot;other&quot;: &quot;/images/0F8EC12223174657B2E842076D54C361/9B61E85244.jpg&quot;,
+        &quot;nickname&quot;: &quot;555&quot;,
+        &quot;name&quot;: &quot;yt59856b15cf394e7b84a7d48447d16098&quot;,
+        &quot;uuid&quot;: &quot;0F8EC12223174657B2E842076D54C361&quot;,
+        &quot;password&quot;: &quot;123456&quot;
+    }
+}
+
+//失败
+{
+    &quot;code&quot;: 2,
+    &quot;msg&quot;: &quot;failed&quot;
+}
+</code></pre>
+
+<h3>5 获取好友列表(根据环信ID数组获取用户信息)</h3>
+<p><em>路径：</em> <code>UserWeb?method=getNames</code></p>
+<p><em>方法：</em> <code>post</code></p>
+<p><em>请求：</em> </p>
+<pre><code>//表单
+name=[环信id1,环信id2,....]
+</code></pre>
+
+<p><em>响应体：</em></p>
+<pre><code>//成功
+{
+    &quot;code&quot;: 1,
+    &quot;msg&quot;:&quot;success&quot;,
+    &quot;datas&quot;: [
+        {
+            &quot;uuid&quot;: &quot;9BEEBFFFC14545CDAB517210D46A7923&quot;,             //用户表中主键
+            &quot;username&quot;: &quot;renxiang&quot;,                                 //用户名       
+            &quot;name&quot;: &quot;yt1cd3ce4132a746db8a1a8f1c0b34f907&quot;,           //环信id
+            &quot;other&quot;: &quot;/images/9BEEBFFFC14545CDAB517210D46A7923/A0D46D81C8.jpg&quot;,  //用户头像
+            &quot;nickname&quot;: &quot;android&quot;                   //用户昵称
+        }，
+        .....
+    ]
+}
+
+//失败
+{
+    &quot;code&quot;: 2,
+    &quot;msg&quot;: &quot;failed&quot;
+}
+</code></pre>
+
+<h3>6 查找好友(根据昵称获取用户信息)</h3>
+<p><em>路径：</em> <code>UserWeb?method=getUsers</code></p>
+<p><em>方法：</em> <code>post</code></p>
+<p><em>请求：</em> </p>
+<pre><code>//表单
+nickname=用户昵称
+</code></pre>
+
+<p><em>响应体：</em></p>
+<pre><code>//成功
+{
+    &quot;code&quot;: 1,
+    &quot;msg&quot;: &quot; success&quot;,
+    &quot;datas&quot;: [
+        {
+            &quot;uuid&quot;: &quot;9BEEBFFFC14545CDAB517210D46A7923&quot;,             //用户表中主键
+            &quot;username&quot;: &quot;Android&quot;,                                  //用户名       
+            &quot;name&quot;: &quot;yt1cd3ce4132a746db8a1a8f1c0b34f907&quot;,           //环信id
+            &quot;other&quot;: &quot;/images/9BEEBFFFC14545CDAB517210D46A7923/A0D46D81C8.jpg&quot;,  //用户头像
+            &quot;nickname&quot;: &quot;android&quot;                   //用户昵称
+        }，
+        .....
+    ]
+}
+
+//失败
+{
+    &quot;code&quot;: 2,
+    &quot;msg&quot;: &quot;failed&quot;
+}
+</code></pre>
+
+<h2>商品模块</h2>
+<h3>1.获取所有商品</h3>
+<p><em>路径：</em> <code>GoodsServlet?method=getAll</code></p>
+<p><em>方法：</em> <code>post</code></p>
+<p><em>请求：</em> </p>
+<pre><code>//商品每页20条数据
+pageNo=1  //string
+//类型
+type=&quot;&quot;  //全部商品传空字符串即可
+</code></pre>
+
+<p>类型共有<strong>household、electron、dress、toy、book、gift、other</strong>
+分别对应<strong>家用、电子、服饰、玩具、图书、礼品、其它&quot;</strong></p>
+<p><em>响应体：</em></p>
+<pre><code>//成功
+{
+    &quot;code&quot;: 1,
+    &quot;msg&quot;: &quot; success&quot;,
+    &quot;datas&quot;: [
+            {
+                &quot;price&quot;: &quot;66&quot;,        //商品价格
+                &quot;name&quot;: &quot;单车&quot;,      //商品名称
+                &quot;description&quot;: &quot;......&quot;,  //商品描述
+                &quot;page&quot;: &quot;/images/D3228118230A43C0B77/5606FF8A48F1FC4907D/F99E38F09A.JPEG&quot;, //商品的第一张图片
+                &quot;type&quot;: &quot;other&quot;,      //商品类型
+                &quot;uuid&quot;: &quot;5606FF8EF60146A48F1FCDC34144907D&quot;,  //商品表中主键
+                &quot;master&quot;: &quot;android&quot;  //发布者
+            },
+            {
+               ......
+            },
+            .....
+        ]
+}
+
+//失败
+{
+    &quot;code&quot;: 2,
+    &quot;msg&quot;: &quot;failed&quot;
+}
+</code></pre>
+
+<h3>2.获取个人商品</h3>
+<p><em>路径：</em> <code>GoodsServlet?method=getAll</code></p>
+<p><em>方法：</em> <code>post</code></p>
+<p><em>请求：</em> </p>
+<pre><code>//商品每页20条数据
+pageNo=1 //string
+//发布者
+master=&quot;android&quot;
+//类型
+type=&quot;dress&quot;    //空字符串可获取所有个人商品
+</code></pre>
+
+<p>类型共有<strong>household、electron、dress、toy、book、gift、other</strong>
+分别对应<strong>家用、电子、服饰、玩具、图书、礼品、其它&quot;</strong></p>
+<p><em>响应体：</em></p>
+<pre><code>//成功
+{
+    &quot;code&quot;: 1,
+    &quot;msg&quot;: &quot; success&quot;,
+    &quot;datas&quot;: [
+            {
+                &quot;price&quot;: &quot;66&quot;,        //商品价格
+                &quot;name&quot;: &quot;单车&quot;,      //商品名称
+                &quot;description&quot;: &quot;......&quot;,  //商品描述
+                &quot;page&quot;: &quot;/images/D3228118230A43C0B77/5606FF8A48F1FC4907D/F99E38F09A.JPEG&quot;, //商品的第一张图片
+                &quot;type&quot;: &quot;other&quot;,      //商品类型
+                &quot;uuid&quot;: &quot;5606FF8EF60146A48F1FCDC34144907D&quot;,  //商品表中主键
+                &quot;master&quot;: &quot;android&quot;  //发布者
+            },
+            {
+               ......
+            },
+            .....
+        ]
+}
+
+//失败
+{
+    &quot;code&quot;: 2,
+    &quot;msg&quot;: &quot;failed&quot;
+}
+</code></pre>
+
+<h3>3.添加商品</h3>
+<p><em>路径：</em> <code>GoodsServlet?method=add</code></p>
+<p><em>方法：</em> <code>post/Multipart</code></p>
+<p><em>请求：</em> </p>
+<p>//请求是一个商品类的<strong>JSON字符串</strong>， <strong>商品的图片以文件形式上传</strong></p>
+<pre><code>{
+    &quot;description&quot;: &quot;诚信商家，非诚勿扰&quot;,     //商品描述
+    &quot;master&quot;: &quot;android&quot;,                    //商品发布者
+    &quot;name&quot;: &quot;礼物，鱼丸，鱼翅，火箭，飞机&quot;,   //商品名称
+    &quot;price&quot;: &quot;88&quot;,                          //商品价格
+    &quot;type&quot;: &quot;gift&quot;                          //商品类型
+}
+</code></pre>
+
+<p><em>响应体：</em></p>
+<pre><code>//成功
+{
+    &quot;code&quot;: 1,
+    &quot;msg&quot;: &quot;添加成功！&quot;
+}
+</code></pre>
+
+<h3>4.删除商品</h3>
+<p><em>路径：</em> <code>GoodsServlet?method=delete</code></p>
+<p><em>方法：</em> <code>post</code></p>
+<p><em>请求：</em> </p>
+<pre><code>//商品的uuid(商品表中的主键)
+uuid=&quot;.....&quot;
+</code></pre>
+
+<p><em>响应体：</em></p>
+<pre><code>//成功
+{
+    &quot;code&quot;: 1,
+    &quot;msg&quot;: &quot;success&quot;
+}
+
+//失败
+{
+    &quot;code&quot;: 2,
+    &quot;msg&quot;: &quot;file&quot;
+}
+</code></pre>
+
+<h3>5.商品详情</h3>
+<p><em>路径：</em> <code>GoodsServlet?method=view</code></p>
+<p><em>方法：</em> <code>post</code></p>
+<p><em>请求：</em> </p>
+<pre><code>//商品的uuid(商品表中的主键)
+uuid=&quot;.....&quot;
+</code></pre>
+
+<p><em>响应体：</em></p>
+<pre><code>//成功
+{
+    &quot;code&quot;: 1,
+    &quot;msg&quot;: &quot; success&quot;,
+    &quot;datas&quot;: {
+        &quot;uuid&quot;: &quot;5606FF8EF60146A48F1FCDC34144907D&quot;,     //商品表中主键
+        &quot;name&quot;: &quot;货物&quot;,                                   //商品名称
+        &quot;type&quot;: &quot;other&quot;,                                //商品类型
+        &quot;price&quot;: &quot;66&quot;,                                  //商品价格
+        &quot;description&quot;: &quot;.......&quot;,                       //商品描述
+        &quot;master&quot;: &quot;android&quot;,                            //商品发布者                                 
+        &quot;pages&quot;: [
+            {
+                &quot;uuid&quot;: &quot;5EDCF1DA855348AF8DAD4DBA418897EF&quot;,
+                &quot;goodsuuid&quot;: &quot;5606FF8EF60146A48F1FCDC34144907D&quot;,
+                &quot;uri&quot;: &quot;/images/D3228118230A430B77/5606FF8F1FCDC34144907D/F99E38F09A.JPEG&quot;,  //商品图片的uri路径
+                &quot;url&quot;: &quot;http://192.168.1.37:8080/images/5606FF8EF60146A48F1FCDC34144907D/F99E38F09A.JPEG&quot;,
+                &quot;name&quot;: &quot;F99E38F09A.JPEG&quot;
+            },
+            {
+                .....   
+            }
+
+            .....
+        ]
+    }
+}
+
+//失败
+{
+    &quot;code&quot;: 2,
+    &quot;msg&quot;: &quot;file&quot;
+}
+</code></pre>
+
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
