@@ -9,17 +9,29 @@ import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.fuicuiedu.xc.easyshop_20170206.R;
 import com.fuicuiedu.xc.easyshop_20170206.commons.ActivityUtils;
+import com.fuicuiedu.xc.easyshop_20170206.commons.LogUtils;
 import com.fuicuiedu.xc.easyshop_20170206.commons.RegexUtils;
 import com.fuicuiedu.xc.easyshop_20170206.components.ProgressDialogFragment;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -111,6 +123,44 @@ public class RegisterActivity extends AppCompatActivity {
 //                4.解析响应
 //                    4.1 判断是否连接成功（判断响应码）
 //                    4.2 如果响应码是200 - 299 -> 取出响应体（解析，展示）
+
+//        1.创建客户端
+        OkHttpClient okHttpClient = new OkHttpClient();
+//        2.构建请求
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("username",username);
+            jsonObject.put("password",password);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String json = jsonObject.toString();
+        //请求体
+        RequestBody requestBody = RequestBody.create(null,json);
+
+        Request request = new Request.Builder()
+                .url("http://wx.feicuiedu.com:9094/yitao/UserWeb?method=register")
+                .post(requestBody)
+                .build();
+//        3.客户端执行请求(推荐异步回调)
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                //超时或没有网络连接
+                //注意：这里是后台线程！
+                LogUtils.e("网络连接失败");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                //成功
+                //注意：这里是后台线程！
+                LogUtils.e("请求成功");
+            }
+        });
+
+
+
 
     }
 }
