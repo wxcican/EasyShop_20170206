@@ -16,7 +16,9 @@ import com.fuicuiedu.xc.easyshop_20170206.commons.ActivityUtils;
 import com.fuicuiedu.xc.easyshop_20170206.commons.LogUtils;
 import com.fuicuiedu.xc.easyshop_20170206.commons.RegexUtils;
 import com.fuicuiedu.xc.easyshop_20170206.components.ProgressDialogFragment;
+import com.fuicuiedu.xc.easyshop_20170206.model.UserResult;
 import com.fuicuiedu.xc.easyshop_20170206.network.EasyShopClient;
+import com.google.gson.Gson;
 
 
 import org.json.JSONException;
@@ -123,47 +125,26 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
 
-//            {
-//                "code": 1,
-//                "msg": "succeed",
-//                "data": {
-//                    "username": "xc62",
-//                    "name": "yt59856b15cf394e7b84a7d48447d16098",
-//                    "uuid": "0F8EC12223174657B2E842076D54C361",
-//                    "password": "123456"
-//            }
-
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 //网络连接成功
                 //响应成功
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
+                    //解析响应体，保存到一个实体类中
+
                     //拿到响应体
                     ResponseBody responseBody = response.body();
                     //响应体转换为String
                     String json = responseBody.string();
-                    try {
-                        //解析，String转为json格式
-                        JSONObject jsonObject = new JSONObject(json);
-                        int code = jsonObject.getInt("code");
-                        String msg = jsonObject.getString("msg");
-                        //判断是否注册成功
-                        if (code == 1){
-                            //拿到data数据
-                            JSONObject data = jsonObject.getJSONObject("data");
-                            String username = data.getString("username");
-                            LogUtils.e("注册成功，用户名=" + username);
-                        }
 
-                        //注册失败
-                        if (code == 2){
-                            LogUtils.e("注册失败，" + msg);
-                        }
+                    //Gson：生成和解析json数据的第三方库。
+                    //生成：tojson()
+                    //解析：new Gson().fromJson(json数据，实体类);
 
+                    UserResult result = new Gson().fromJson(json, UserResult.class);
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    LogUtils.e("code = " + result.getCode());
+                    LogUtils.e("msg = " + result.getMsg());
                 }
             }
         });
