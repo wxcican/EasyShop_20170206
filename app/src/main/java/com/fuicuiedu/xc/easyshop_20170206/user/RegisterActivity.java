@@ -143,8 +143,14 @@ public class RegisterActivity extends AppCompatActivity {
 
                     UserResult result = new Gson().fromJson(json, UserResult.class);
 
-                    LogUtils.e("code = " + result.getCode());
-                    LogUtils.e("msg = " + result.getMsg());
+                    if (result.getCode() == 1){
+                        String password = result.getData().getPassword();
+                        LogUtils.e("密码:" + password);
+                    }
+
+                    if (result.getCode() == 2){
+                        LogUtils.e(result.getMessage());
+                    }
                 }
             }
         });
