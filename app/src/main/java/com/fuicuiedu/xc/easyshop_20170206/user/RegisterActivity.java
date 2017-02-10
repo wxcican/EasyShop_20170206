@@ -129,9 +129,10 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onResponseUI(Call call, Response response) {
-                activityUtils.showToast("注册成功");
+            public void onResponseUI(Call call, String body) {
+                UserResult result = new Gson().fromJson(body,UserResult.class);
             }
+
         });
     }
 
