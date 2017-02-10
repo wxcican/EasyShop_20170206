@@ -1,5 +1,7 @@
 package com.fuicuiedu.xc.easyshop_20170206.user;
 
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -14,7 +16,9 @@ import android.widget.EditText;
 import com.fuicuiedu.xc.easyshop_20170206.R;
 import com.fuicuiedu.xc.easyshop_20170206.commons.ActivityUtils;
 import com.fuicuiedu.xc.easyshop_20170206.components.ProgressDialogFragment;
+import com.fuicuiedu.xc.easyshop_20170206.model.UserResult;
 import com.fuicuiedu.xc.easyshop_20170206.network.EasyShopClient;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 
@@ -115,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
                         //后台线程
-                        activityUtils.showToast("登录成功");
+                        handler.sendEmptyMessage(0);
                     }
                 });
 
@@ -126,4 +130,12 @@ public class LoginActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    private Handler handler = new Handler(){
+        @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+            activityUtils.showToast("登录成功");
+        }
+    };
 }

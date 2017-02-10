@@ -1,5 +1,7 @@
 package com.fuicuiedu.xc.easyshop_20170206.user;
 
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -18,6 +20,7 @@ import com.fuicuiedu.xc.easyshop_20170206.commons.RegexUtils;
 import com.fuicuiedu.xc.easyshop_20170206.components.ProgressDialogFragment;
 import com.fuicuiedu.xc.easyshop_20170206.model.UserResult;
 import com.fuicuiedu.xc.easyshop_20170206.network.EasyShopClient;
+import com.fuicuiedu.xc.easyshop_20170206.network.UICallBack;
 import com.google.gson.Gson;
 
 
@@ -119,40 +122,19 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         Call call = EasyShopClient.getInstance().register(username,password);
-        call.enqueue(new Callback() {
+        call.enqueue(new UICallBack() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailureUI(Call call, IOException e) {
 
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                //网络连接成功
-                //响应成功
-                if (response.isSuccessful()) {
-                    //解析响应体，保存到一个实体类中
-
-                    //拿到响应体
-                    ResponseBody responseBody = response.body();
-                    //响应体转换为String
-                    String json = responseBody.string();
-
-                    //Gson：生成和解析json数据的第三方库。
-                    //生成：tojson()
-                    //解析：new Gson().fromJson(json数据，实体类);
-
-                    UserResult result = new Gson().fromJson(json, UserResult.class);
-
-                    if (result.getCode() == 1){
-                        String password = result.getData().getPassword();
-                        LogUtils.e("密码:" + password);
-                    }
-
-                    if (result.getCode() == 2){
-                        LogUtils.e(result.getMessage());
-                    }
-                }
+            public void onResponseUI(Call call, Response response) {
+                activityUtils.showToast("注册成功");
             }
         });
     }
+
+
+
 }
