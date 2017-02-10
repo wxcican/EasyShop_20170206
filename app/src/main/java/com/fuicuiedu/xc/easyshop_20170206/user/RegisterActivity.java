@@ -123,9 +123,48 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
 
+//            {
+//                "code": 1,
+//                "msg": "succeed",
+//                "data": {
+//                    "username": "xc62",
+//                    "name": "yt59856b15cf394e7b84a7d48447d16098",
+//                    "uuid": "0F8EC12223174657B2E842076D54C361",
+//                    "password": "123456"
+//            }
+
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+                //网络连接成功
+                //响应成功
+                if (response.isSuccessful()){
+                    //拿到响应体
+                    ResponseBody responseBody = response.body();
+                    //响应体转换为String
+                    String json = responseBody.string();
+                    try {
+                        //解析，String转为json格式
+                        JSONObject jsonObject = new JSONObject(json);
+                        int code = jsonObject.getInt("code");
+                        String msg = jsonObject.getString("msg");
+                        //判断是否注册成功
+                        if (code == 1){
+                            //拿到data数据
+                            JSONObject data = jsonObject.getJSONObject("data");
+                            String username = data.getString("username");
+                            LogUtils.e("注册成功，用户名=" + username);
+                        }
 
+                        //注册失败
+                        if (code == 2){
+                            LogUtils.e("注册失败，" + msg);
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
     }
