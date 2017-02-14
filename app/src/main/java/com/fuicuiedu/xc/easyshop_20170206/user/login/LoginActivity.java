@@ -1,4 +1,4 @@
-package com.fuicuiedu.xc.easyshop_20170206.user;
+package com.fuicuiedu.xc.easyshop_20170206.user.login;
 
 import android.os.Handler;
 import android.os.Message;
@@ -16,9 +16,8 @@ import android.widget.EditText;
 import com.fuicuiedu.xc.easyshop_20170206.R;
 import com.fuicuiedu.xc.easyshop_20170206.commons.ActivityUtils;
 import com.fuicuiedu.xc.easyshop_20170206.components.ProgressDialogFragment;
-import com.fuicuiedu.xc.easyshop_20170206.model.UserResult;
 import com.fuicuiedu.xc.easyshop_20170206.network.EasyShopClient;
-import com.google.gson.Gson;
+import com.fuicuiedu.xc.easyshop_20170206.user.register.RegisterActivity;
 
 import java.io.IOException;
 
@@ -27,12 +26,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
-import okhttp3.logging.HttpLoggingInterceptor;
 
 public class LoginActivity extends AppCompatActivity {
 

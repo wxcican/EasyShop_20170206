@@ -1,7 +1,8 @@
-package com.fuicuiedu.xc.easyshop_20170206.user;
+package com.fuicuiedu.xc.easyshop_20170206.user.register;
 
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -17,11 +18,14 @@ import com.fuicuiedu.xc.easyshop_20170206.R;
 import com.fuicuiedu.xc.easyshop_20170206.commons.ActivityUtils;
 import com.fuicuiedu.xc.easyshop_20170206.commons.LogUtils;
 import com.fuicuiedu.xc.easyshop_20170206.commons.RegexUtils;
+import com.fuicuiedu.xc.easyshop_20170206.components.AlertDialogFragment;
 import com.fuicuiedu.xc.easyshop_20170206.components.ProgressDialogFragment;
+import com.fuicuiedu.xc.easyshop_20170206.main.MainActivity;
 import com.fuicuiedu.xc.easyshop_20170206.model.UserResult;
 import com.fuicuiedu.xc.easyshop_20170206.network.EasyShopClient;
 import com.fuicuiedu.xc.easyshop_20170206.network.UICallBack;
 import com.google.gson.Gson;
+import com.hannesdorfmann.mosby.mvp.MvpActivity;
 
 
 import org.json.JSONException;
@@ -42,7 +46,7 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends MvpActivity<RegisterView,RegisterPresenter> implements RegisterView {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -69,6 +73,12 @@ public class RegisterActivity extends AppCompatActivity {
         activityUtils = new ActivityUtils(this);
 
         init();
+    }
+
+    @NonNull
+    @Override
+    public RegisterPresenter createPresenter() {
+        return new RegisterPresenter();//创建注册的业务类
     }
 
     private void init() {
@@ -111,31 +121,64 @@ public class RegisterActivity extends AppCompatActivity {
     @OnClick(R.id.btn_register)
     public void onClick() {
         if (RegexUtils.verifyUsername(username) != RegexUtils.VERIFY_SUCCESS) {
-            activityUtils.showToast(R.string.username_rules);
-            return;
-        } else if (RegexUtils.verifyPassword(password) != RegexUtils.VERIFY_SUCCESS) {
-            activityUtils.showToast(R.string.password_rules);
-            return;
-        } else if (!TextUtils.equals(password, pwd_again)) {
-            activityUtils.showToast(R.string.username_equal_pwd);
-            return;
+                String msg = getString(R.string.username_rules);
+                showUserPasswordError(msg);
+                return;
+            } else if (RegexUtils.verifyPassword(password) != RegexUtils.VERIFY_SUCCESS) {
+                String msg = getString(R.string.password_rules);
+                showUserPasswordError(msg);
+                return;
+            } else if (!TextUtils.equals(password, pwd_again)) {
+                String msg = getString(R.string.username_equal_pwd);
+                showUserPasswordError(msg);
+                return;
         }
 
-        Call call = EasyShopClient.getInstance().register(username,password);
-        call.enqueue(new UICallBack() {
-            @Override
-            public void onFailureUI(Call call, IOException e) {
+        //业务类执行注册的业务
+        presenter.register(username,password);
 
-            }
-
-            @Override
-            public void onResponseUI(Call call, String body) {
-                UserResult result = new Gson().fromJson(body,UserResult.class);
-            }
-
-        });
     }
 
+    //##########################################     视图接口的实现    ######################
 
+    @Override
+    public void showPrb() {
+        //关闭软键盘
+        activityUtils.hideSoftKeyboard();
+        //初始化“进度条”
+        if (dialogFragment == null) dialogFragment = new ProgressDialogFragment();
+        //如果已经显示，则跳出
+        if (dialogFragment.isVisible()) return;
+        //"进度条"显示
+        dialogFragment.show(getSupportFragmentManager(),"progress_dialog_fragment");
+    }
 
+    @Override
+    public void hidePrb() {
+        dialogFragment.dismiss();
+    }
+
+    @Override
+    public void registerSuccess() {
+        //成功跳转到主页
+        activityUtils.startActivity(MainActivity.class);
+        finish();
+    }
+
+    @Override
+    public void registerFailed() {
+        et_userName.setText("");
+    }
+
+    @Override
+    public void showMsg(String msg) {
+        activityUtils.showToast(msg);
+    }
+
+    @Override
+    public void showUserPasswordError(String msg) {
+        //展示弹出，提示错误信息
+        AlertDialogFragment fragment = AlertDialogFragment.newInstance(msg);
+        fragment.show(getSupportFragmentManager(),getString(R.string.username_pwd_rule));
+    }
 }

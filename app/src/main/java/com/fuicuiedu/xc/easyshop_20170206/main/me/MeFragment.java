@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.fuicuiedu.xc.easyshop_20170206.R;
 import com.fuicuiedu.xc.easyshop_20170206.commons.ActivityUtils;
-import com.fuicuiedu.xc.easyshop_20170206.user.LoginActivity;
+import com.fuicuiedu.xc.easyshop_20170206.user.login.LoginActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
