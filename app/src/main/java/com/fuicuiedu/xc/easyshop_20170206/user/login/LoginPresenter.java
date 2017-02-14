@@ -19,7 +19,7 @@ import okhttp3.Call;
 public class LoginPresenter extends MvpNullObjectBasePresenter<LoginView> {
 
 
-    // TODO: 2017/2/14 0014 环信相关 
+    // TODO: 2017/2/14 0014 环信相关
     private Call call;
 
     @Override

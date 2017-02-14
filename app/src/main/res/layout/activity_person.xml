@@ -24,20 +24,20 @@
         android:layout_below="@+id/toolbar"
         android:gravity="center">
 
-        <!--<com.pkmmte.view.CircularImageView-->
-            <!--android:id="@+id/iv_user_head"-->
-            <!--android:layout_width="@dimen/dp_140"-->
-            <!--android:layout_height="@dimen/dp_140"-->
-            <!--android:scaleType="centerInside"-->
-            <!--android:src="@drawable/user_ico"-->
-            <!--app:border="true"-->
-            <!--app:border_color="#16f5f5f5"-->
-            <!--app:border_width="@dimen/dp_6"-->
-            <!--app:selector="true"-->
-            <!--app:selector_color="#4D000000"-->
-            <!--app:selector_stroke_color="#16f5f5f5"-->
-            <!--app:selector_stroke_width="@dimen/dp_6"-->
-            <!--app:shadow="false" />-->
+        <com.pkmmte.view.CircularImageView
+            android:id="@+id/iv_user_head"
+            android:layout_width="@dimen/dp_140"
+            android:layout_height="@dimen/dp_140"
+            android:scaleType="centerInside"
+            android:src="@drawable/user_ico"
+            app:border="true"
+            app:border_color="#16f5f5f5"
+            app:border_width="@dimen/dp_6"
+            app:selector="true"
+            app:selector_color="#4D000000"
+            app:selector_stroke_color="#16f5f5f5"
+            app:selector_stroke_width="@dimen/dp_6"
+            app:shadow="false" />
     </LinearLayout>
 
     <ListView
