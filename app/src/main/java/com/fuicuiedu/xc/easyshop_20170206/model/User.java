@@ -27,6 +27,32 @@ public class User {
     @SerializedName("nickname")
     private String nick_name;
 
+    //alt + insert 生成get和set方法
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setHx_Id(String hx_Id) {
+        this.hx_Id = hx_Id;
+    }
+
+    public void setTable_Id(String table_Id) {
+        this.table_Id = table_Id;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setHead_Image(String head_Image) {
+        this.head_Image = head_Image;
+    }
+
+    public void setNick_name(String nick_name) {
+        this.nick_name = nick_name;
+    }
+
     public String getName() {
         return name;
     }

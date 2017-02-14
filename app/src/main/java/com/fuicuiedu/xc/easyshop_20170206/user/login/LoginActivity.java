@@ -2,6 +2,7 @@ package com.fuicuiedu.xc.easyshop_20170206.user.login;
 
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -16,8 +17,10 @@ import android.widget.EditText;
 import com.fuicuiedu.xc.easyshop_20170206.R;
 import com.fuicuiedu.xc.easyshop_20170206.commons.ActivityUtils;
 import com.fuicuiedu.xc.easyshop_20170206.components.ProgressDialogFragment;
+import com.fuicuiedu.xc.easyshop_20170206.main.MainActivity;
 import com.fuicuiedu.xc.easyshop_20170206.network.EasyShopClient;
 import com.fuicuiedu.xc.easyshop_20170206.user.register.RegisterActivity;
+import com.hannesdorfmann.mosby.mvp.MvpActivity;
 
 import java.io.IOException;
 
@@ -28,7 +31,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends MvpActivity<LoginView,LoginPresenter> implements LoginView{
 
     @BindView(R.id.et_username)
     EditText et_userName;
@@ -52,6 +55,12 @@ public class LoginActivity extends AppCompatActivity {
         activityUtils = new ActivityUtils(this);
 
         init();
+    }
+
+    @NonNull
+    @Override
+    public LoginPresenter createPresenter() {
+        return new LoginPresenter();
     }
 
     private void init() {
@@ -102,22 +111,8 @@ public class LoginActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
-
-                Call call = EasyShopClient.getInstance().login(username,password);
-                call.enqueue(new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        //后台线程
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        //后台线程
-                        handler.sendEmptyMessage(0);
-                    }
-                });
-
-
+                //调用业务类的登录方法
+                presenter.login(username,password);
                 break;
             case R.id.tv_register:
                 activityUtils.startActivity(RegisterActivity.class);
@@ -125,11 +120,34 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private Handler handler = new Handler(){
-        @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-            activityUtils.showToast("登录成功");
-        }
-    };
+    //###############################  视图接口相关 ###############
+
+    @Override
+    public void showPrb() {
+        activityUtils.hideSoftKeyboard();
+        if (dialogFragment == null) dialogFragment = new ProgressDialogFragment();
+        if (dialogFragment.isVisible()) return;
+        dialogFragment.show(getSupportFragmentManager(),"progress_dialog_fragment");
+    }
+
+    @Override
+    public void hidePrb() {
+        dialogFragment.dismiss();
+    }
+
+    @Override
+    public void loginFailed() {
+        et_userName.setText("");
+    }
+
+    @Override
+    public void loginSuccess() {
+        activityUtils.startActivity(MainActivity.class);
+        finish();
+    }
+
+    @Override
+    public void showMsg(String msg) {
+        activityUtils.showToast(msg);
+    }
 }

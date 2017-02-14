@@ -1,5 +1,6 @@
 package com.fuicuiedu.xc.easyshop_20170206.user.register;
 
+import com.fuicuiedu.xc.easyshop_20170206.model.CachePreferences;
 import com.fuicuiedu.xc.easyshop_20170206.model.User;
 import com.fuicuiedu.xc.easyshop_20170206.model.UserResult;
 import com.fuicuiedu.xc.easyshop_20170206.network.EasyShopClient;
@@ -20,6 +21,8 @@ import okhttp3.Response;
 public class RegisterPresenter extends MvpNullObjectBasePresenter<RegisterView> {
     //业务，执行网络请求，完成注册
     //在特定的地方，触发对应Ui操作
+
+    // TODO: 2017/2/14 0014 环信相关
 
     private Call call;
 
@@ -55,7 +58,8 @@ public class RegisterPresenter extends MvpNullObjectBasePresenter<RegisterView> 
                     getView().showMsg("注册成功");
                     //拿到用户的实体类
                     User user = result.getData();
-                    // TODO: 2017/2/14 0014  将用户的信息保存到本地配置中
+                    //将用户的信息保存到本地配置中
+                    CachePreferences.setUser(user);
 
                     //执行注册成功的方法
                     getView().registerSuccess();
