@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import com.fuicuiedu.xc.easyshop_20170206.R;
 import com.fuicuiedu.xc.easyshop_20170206.commons.ActivityUtils;
+import com.fuicuiedu.xc.easyshop_20170206.components.PicWindow;
 import com.fuicuiedu.xc.easyshop_20170206.components.ProgressDialogFragment;
 import com.fuicuiedu.xc.easyshop_20170206.main.MainActivity;
 import com.fuicuiedu.xc.easyshop_20170206.model.CachePreferences;
@@ -40,6 +41,7 @@ public class PersonActivity extends MvpActivity<PersonView, PersonPersenter> imp
     private ProgressDialogFragment progressDialogFragment;
     private List<ItemShow> list = new ArrayList<>();
     private PersonAdapter adapter;
+    private PicWindow picWindow;
 
 
     @Override
@@ -114,8 +116,17 @@ public class PersonActivity extends MvpActivity<PersonView, PersonPersenter> imp
         switch (view.getId()){
             //点击头像
             case R.id.iv_user_head:
-                // TODO: 2017/2/14 0014 头像来源选择（相册，拍照）
-                activityUtils.showToast("头像更新，待实现");
+                //头像来源选择（相册，拍照）
+                //如果为空，创建实例（实现监听）
+                if (picWindow == null){
+                    picWindow = new PicWindow(this,listener);
+                }
+                //如果已经显示，则关闭
+                if (picWindow.isShowing()){
+                    picWindow.dismiss();
+                    return;
+                }
+                picWindow.show();//显示来源选择框
                 break;
             //点击退出登录
             case R.id.btn_login_out:
@@ -129,6 +140,20 @@ public class PersonActivity extends MvpActivity<PersonView, PersonPersenter> imp
         }
     }
 
+    //图片选择弹窗的自定义监听
+    private PicWindow.Listener listener = new PicWindow.Listener() {
+        @Override
+        public void toGallery() {
+            //从相册中选择
+            activityUtils.showToast("从相册中选择");
+        }
+
+        @Override
+        public void toCamera() {
+            //从相机中选择
+            activityUtils.showToast("从相机中选择");
+        }
+    };
 
     // ######################    视图接口相关    #####################
     @Override
