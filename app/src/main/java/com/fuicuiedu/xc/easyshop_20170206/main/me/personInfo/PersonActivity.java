@@ -1,6 +1,8 @@
 package com.fuicuiedu.xc.easyshop_20170206.main.me.personInfo;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +23,11 @@ import com.fuicuiedu.xc.easyshop_20170206.model.ItemShow;
 import com.fuicuiedu.xc.easyshop_20170206.model.User;
 import com.hannesdorfmann.mosby.mvp.MvpActivity;
 
+import org.hybridsquad.android.library.CropHandler;
+import org.hybridsquad.android.library.CropHelper;
+import org.hybridsquad.android.library.CropParams;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -145,15 +152,60 @@ public class PersonActivity extends MvpActivity<PersonView, PersonPersenter> imp
         @Override
         public void toGallery() {
             //从相册中选择
-            activityUtils.showToast("从相册中选择");
+            //清空裁剪的缓存
+            CropHelper.clearCachedCropFile(cropHandler.getCropParams().uri);
+            Intent intent = CropHelper.buildCropFromGalleryIntent(cropHandler.getCropParams());
+            startActivityForResult(intent,CropHelper.REQUEST_CROP);
         }
 
         @Override
         public void toCamera() {
             //从相机中选择
-            activityUtils.showToast("从相机中选择");
+            CropHelper.clearCachedCropFile(cropHandler.getCropParams().uri);
+            Intent intent = CropHelper.buildCaptureIntent(cropHandler.getCropParams().uri);
+            startActivityForResult(intent,CropHelper.REQUEST_CAMERA);
         }
     };
+
+    //图片裁剪的handler
+    private CropHandler cropHandler = new CropHandler() {
+        @Override
+        public void onPhotoCropped(Uri uri) {
+            //通过uri拿到图片文件
+            File file = new File(uri.getPath());
+            // TODO: 2017/2/15 0015 业务类上传头像
+            activityUtils.showToast("裁剪成功，上传头像");
+        }
+
+        @Override
+        public void onCropCancel() {
+        }
+
+        @Override
+        public void onCropFailed(String message) {
+        }
+
+        @Override
+        public CropParams getCropParams() {
+            //自定义裁剪大小参数
+            CropParams cropParams = new CropParams();
+            cropParams.aspectX = 400;
+            cropParams.aspectY = 400;
+            return cropParams;
+        }
+
+        @Override
+        public Activity getContext() {
+            return PersonActivity.this;
+        }
+    };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //帮助我们去处理结果（裁剪完的图像）
+        CropHelper.handleResult(cropHandler,requestCode,resultCode,data);
+    }
 
     // ######################    视图接口相关    #####################
     @Override

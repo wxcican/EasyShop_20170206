@@ -40,5 +40,8 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.0'
     //mosby。MVP
     compile 'com.hannesdorfmann.mosby:mvp:2.0.1'
+    //图片裁剪的库
+    compile 'org.hybridsquad.android.photocropper:library:2.1.0'
+
 
 }
