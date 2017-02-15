@@ -173,8 +173,8 @@ public class PersonActivity extends MvpActivity<PersonView, PersonPersenter> imp
         public void onPhotoCropped(Uri uri) {
             //通过uri拿到图片文件
             File file = new File(uri.getPath());
-            // TODO: 2017/2/15 0015 业务类上传头像
-            activityUtils.showToast("裁剪成功，上传头像");
+            //业务类上传头像
+            presenter.updataAvatar(file);
         }
 
         @Override
@@ -228,5 +228,6 @@ public class PersonActivity extends MvpActivity<PersonView, PersonPersenter> imp
     @Override
     public void updataAvatar(String url) {
         // TODO: 2017/2/14 0014 头像加载操作
+        activityUtils.showToast("头像加载操作,待实现");
     }
 }
