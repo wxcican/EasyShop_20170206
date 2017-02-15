@@ -70,7 +70,8 @@ public class PersonActivity extends MvpActivity<PersonView, PersonPersenter> imp
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(onItemClickListener);
 
-        // TODO: 2017/2/14 0014       //获取用户头像
+        //获取用户头像
+        updataAvatar(CachePreferences.getUser().getHead_Image());
     }
 
     @NonNull
@@ -122,18 +123,18 @@ public class PersonActivity extends MvpActivity<PersonView, PersonPersenter> imp
         }
     };
 
-    @OnClick({R.id.btn_login_out,R.id.iv_user_head})
-    public void onClick(View view){
-        switch (view.getId()){
+    @OnClick({R.id.btn_login_out, R.id.iv_user_head})
+    public void onClick(View view) {
+        switch (view.getId()) {
             //点击头像
             case R.id.iv_user_head:
                 //头像来源选择（相册，拍照）
                 //如果为空，创建实例（实现监听）
-                if (picWindow == null){
-                    picWindow = new PicWindow(this,listener);
+                if (picWindow == null) {
+                    picWindow = new PicWindow(this, listener);
                 }
                 //如果已经显示，则关闭
-                if (picWindow.isShowing()){
+                if (picWindow.isShowing()) {
                     picWindow.dismiss();
                     return;
                 }
@@ -159,7 +160,7 @@ public class PersonActivity extends MvpActivity<PersonView, PersonPersenter> imp
             //清空裁剪的缓存
             CropHelper.clearCachedCropFile(cropHandler.getCropParams().uri);
             Intent intent = CropHelper.buildCropFromGalleryIntent(cropHandler.getCropParams());
-            startActivityForResult(intent,CropHelper.REQUEST_CROP);
+            startActivityForResult(intent, CropHelper.REQUEST_CROP);
         }
 
         @Override
@@ -167,7 +168,7 @@ public class PersonActivity extends MvpActivity<PersonView, PersonPersenter> imp
             //从相机中选择
             CropHelper.clearCachedCropFile(cropHandler.getCropParams().uri);
             Intent intent = CropHelper.buildCaptureIntent(cropHandler.getCropParams().uri);
-            startActivityForResult(intent,CropHelper.REQUEST_CAMERA);
+            startActivityForResult(intent, CropHelper.REQUEST_CAMERA);
         }
     };
 
@@ -208,7 +209,7 @@ public class PersonActivity extends MvpActivity<PersonView, PersonPersenter> imp
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //帮助我们去处理结果（裁剪完的图像）
-        CropHelper.handleResult(cropHandler,requestCode,resultCode,data);
+        CropHelper.handleResult(cropHandler, requestCode, resultCode, data);
     }
 
     // ######################    视图接口相关    #####################
@@ -216,7 +217,7 @@ public class PersonActivity extends MvpActivity<PersonView, PersonPersenter> imp
     public void showPrb() {
         if (progressDialogFragment == null) progressDialogFragment = new ProgressDialogFragment();
         if (progressDialogFragment.isVisible()) return;
-        progressDialogFragment.show(getSupportFragmentManager(),"progress_dialog_fragment");
+        progressDialogFragment.show(getSupportFragmentManager(), "progress_dialog_fragment");
     }
 
     @Override
@@ -234,7 +235,7 @@ public class PersonActivity extends MvpActivity<PersonView, PersonPersenter> imp
         //头像加载操作
         ImageLoader.getInstance()
                 //参数，“头像路径（服务器）”，“头像显示的控件”,“加载选项”
-                .displayImage(EasyShopApi.IMAGE_URL + url,ivUserHead,
+                .displayImage(EasyShopApi.IMAGE_URL + url, ivUserHead,
                         AvatarLoadOptions.build());
     }
 }

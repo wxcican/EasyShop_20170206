@@ -11,9 +11,12 @@ import android.widget.TextView;
 
 import com.fuicuiedu.xc.easyshop_20170206.R;
 import com.fuicuiedu.xc.easyshop_20170206.commons.ActivityUtils;
+import com.fuicuiedu.xc.easyshop_20170206.components.AvatarLoadOptions;
 import com.fuicuiedu.xc.easyshop_20170206.main.me.personInfo.PersonActivity;
 import com.fuicuiedu.xc.easyshop_20170206.model.CachePreferences;
+import com.fuicuiedu.xc.easyshop_20170206.network.EasyShopApi;
 import com.fuicuiedu.xc.easyshop_20170206.user.login.LoginActivity;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,7 +50,18 @@ public class MeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        // TODO: 2017/2/14 0014 判断是否登录，显示用户名和头像
+        //判断是否登录，显示昵称和头像
+        if (CachePreferences.getUser().getName() == null) return;//未登录，跳出
+        //刚注册还没有昵称和头像
+        if (CachePreferences.getUser().getNick_name() == null) {
+            tv_login.setText("请输入昵称");
+        }else{
+            tv_login.setText(CachePreferences.getUser().getNick_name());
+        }
+        ImageLoader.getInstance()
+                .displayImage(EasyShopApi.IMAGE_URL + CachePreferences.getUser().getHead_Image()
+                ,iv_user_head, AvatarLoadOptions.build());
+
     }
 
     @OnClick({R.id.iv_user_head,R.id.tv_person_info, R.id.tv_login, R.id.tv_person_goods, R.id.tv_goods_upload})
