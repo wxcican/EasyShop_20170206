@@ -178,7 +178,6 @@ public class ShopFragment extends MvpFragment<ShopView,ShopPresenter> implements
 
     @Override
     public void showLoadMoreEnd() {
-        activityUtils.showToast(getResources().getString(R.string.load_more_end));
         refreshLayout.refreshComplete();
     }
 
