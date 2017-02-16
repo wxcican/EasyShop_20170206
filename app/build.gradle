@@ -48,6 +48,9 @@ dependencies {
     compile 'in.srain.cube:ptr-load-more:1.0.2'
     //recyclerview
     compile 'jp.wasabeef:recyclerview-animators:2.2.3'
+    //使用开源库CircleIndicator来实现ViewPager的圆点指示器
+    compile 'me.relex:circleindicator:1.2.1@aar'
+
 
 
 }
