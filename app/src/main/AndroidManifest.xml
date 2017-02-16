@@ -29,6 +29,7 @@
         <activity android:name=".main.me.personInfo.PersonActivity" />
         <activity android:name=".main.me.personInfo.NickNameActivity" />
         <activity android:name=".main.shop.details.GoodsDetailActivity"></activity>
+        <activity android:name=".main.shop.details.GoodsDetailInfoActivity"/>
     </application>
 
 </manifest>
