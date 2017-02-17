@@ -13,6 +13,7 @@ import com.fuicuiedu.xc.easyshop_20170206.R;
 import com.fuicuiedu.xc.easyshop_20170206.commons.ActivityUtils;
 import com.fuicuiedu.xc.easyshop_20170206.components.AvatarLoadOptions;
 import com.fuicuiedu.xc.easyshop_20170206.main.me.personInfo.PersonActivity;
+import com.fuicuiedu.xc.easyshop_20170206.main.me.persongoods.PersonGoodsActivity;
 import com.fuicuiedu.xc.easyshop_20170206.model.CachePreferences;
 import com.fuicuiedu.xc.easyshop_20170206.network.EasyShopApi;
 import com.fuicuiedu.xc.easyshop_20170206.user.login.LoginActivity;
@@ -79,8 +80,8 @@ public class MeFragment extends Fragment {
                 activityUtils.startActivity(PersonActivity.class);
                 break;
             case R.id.tv_person_goods:
-                // TODO: 2017/2/14 0014 跳转到我的商品页面
-                activityUtils.showToast("我的商品页面，待实现");
+                // 跳转到我的商品页面
+                activityUtils.startActivity(PersonGoodsActivity.class);
                 break;
             case R.id.tv_goods_upload:
                 // TODO: 2017/2/14 0014 跳转到商品上传页面
