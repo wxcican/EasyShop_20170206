@@ -1,5 +1,6 @@
 package com.fuicuiedu.xc.easyshop_20170206.main.me.persongoods;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import com.fuicuiedu.xc.easyshop_20170206.R;
 import com.fuicuiedu.xc.easyshop_20170206.commons.ActivityUtils;
 import com.fuicuiedu.xc.easyshop_20170206.main.shop.ShopAdapter;
 import com.fuicuiedu.xc.easyshop_20170206.main.shop.ShopView;
+import com.fuicuiedu.xc.easyshop_20170206.main.shop.details.GoodsDetailActivity;
 import com.fuicuiedu.xc.easyshop_20170206.model.GoodsInfo;
 import com.hannesdorfmann.mosby.mvp.MvpActivity;
 
@@ -74,8 +76,10 @@ public class PersonGoodsActivity extends MvpActivity<ShopView,PersonGoodsPresent
         shopAdapter.setListener(new ShopAdapter.onItemClickListener() {
             @Override
             public void onItemClicked(GoodsInfo goodsInfo) {
-                // TODO: 2017/2/17 0017 我的商品详情页面
-                activityUtils.showToast("我的商品详情页面，待实现");
+                //我的商品详情页面
+                Intent intent = GoodsDetailActivity.getStartIntent(
+                        PersonGoodsActivity.this,goodsInfo.getUuid(),1);
+                startActivity(intent);
             }
         });
         recyclerView.setAdapter(shopAdapter);

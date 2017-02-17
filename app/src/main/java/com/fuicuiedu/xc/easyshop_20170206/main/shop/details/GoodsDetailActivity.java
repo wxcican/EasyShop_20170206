@@ -1,9 +1,11 @@
 package com.fuicuiedu.xc.easyshop_20170206.main.shop.details;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -67,7 +69,7 @@ public class GoodsDetailActivity extends MvpActivity<GoodsDetailView,GoodsDetail
     @BindView(R.id.btn_detail_message)
     Button btn_detail_message;
 
-    private String str_uuid;
+    private String str_uuid;//商品的uuid
     private ArrayList<ImageView> list;
     private ArrayList<String> list_uri;//存放图片路径的集合
     private GoodsDetailAdapter adapter;//viewPager的适配器
@@ -134,8 +136,22 @@ public class GoodsDetailActivity extends MvpActivity<GoodsDetailView,GoodsDetail
                 break;
             //删除
             case R.id.tv_goods_delete:
-                // TODO: 2017/2/16 0016 删除相关
-                activityUtils.showToast("删除相关,待实现");
+                //删除相关
+                //弹一个警告，是否删除
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle(R.string.goods_title_delete);
+                builder.setMessage(R.string.goods_info_delete);
+                //设置确认按钮，点击删除
+                builder.setPositiveButton(R.string.goods_delete, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //执行删除方法
+                        presenter.delete(str_uuid);
+                    }
+                });
+                //设置取消按钮
+                builder.setNegativeButton(R.string.popu_cancle,null);
+                builder.create().show();
                 break;
         }
     }
