@@ -63,7 +63,7 @@ public class PersonGoodsActivity extends MvpActivity<ShopView,PersonGoodsPresent
 
         //设置toolbar的监听事件
         toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
-        
+
         initView();//初始化视图
 
 
