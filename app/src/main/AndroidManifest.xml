@@ -33,7 +33,8 @@
         <activity android:name=".main.me.personInfo.NickNameActivity" />
         <activity android:name=".main.shop.details.GoodsDetailActivity" />
         <activity android:name=".main.shop.details.GoodsDetailInfoActivity" />
-        <activity android:name=".main.me.persongoods.PersonGoodsActivity"></activity>
+        <activity android:name=".main.me.persongoods.PersonGoodsActivity" />
+        <activity android:name=".main.me.goodsupload.GoodsUpLoadActivity"></activity>
     </application>
 
 </manifest>
