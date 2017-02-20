@@ -11,10 +11,13 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.feicuiedu.apphx.presentation.contact.list.HxContactListFragment;
+import com.feicuiedu.apphx.presentation.conversation.HxConversationListFragment;
 import com.fuicuiedu.xc.easyshop_20170206.R;
 import com.fuicuiedu.xc.easyshop_20170206.commons.ActivityUtils;
 import com.fuicuiedu.xc.easyshop_20170206.main.me.MeFragment;
 import com.fuicuiedu.xc.easyshop_20170206.main.shop.ShopFragment;
+import com.fuicuiedu.xc.easyshop_20170206.model.CachePreferences;
 
 import org.w3c.dom.Text;
 
@@ -52,10 +55,18 @@ public class MainActivity extends AppCompatActivity {
 
     //初始化视图
     private void init() {
-        viewPager.setAdapter(unLoginAdapter);
-
         //刚进来默认选择市场
         textViews[0].setSelected(true);
+
+        //判断用户是否登录，从而选择不同的匹配器
+        if (CachePreferences.getUser().getName() == null){
+            viewPager.setAdapter(unLoginAdapter);
+            viewPager.setCurrentItem(0);
+        }else{
+            viewPager.setAdapter(loginAdapter);
+            viewPager.setCurrentItem(0);
+        }
+
         //viewPager添加滑动监听，用于控制TextView的展示
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -94,6 +105,33 @@ public class MainActivity extends AppCompatActivity {
                 //通讯录
                 case 2:
                     return new UnLoginFragment();
+                //我的
+                case 3:
+                    return new MeFragment();
+            }
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+            return 4;
+        }
+    };
+
+    //已登录时的适配器
+    private FragmentStatePagerAdapter loginAdapter = new FragmentStatePagerAdapter(getSupportFragmentManager()) {
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                //市场
+                case 0:
+                    return new ShopFragment();
+                //消息
+                case 1:
+                    return new HxConversationListFragment();
+                //通讯录
+                case 2:
+                    return new HxContactListFragment();
                 //我的
                 case 3:
                     return new MeFragment();

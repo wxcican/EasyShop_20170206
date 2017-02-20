@@ -52,4 +52,6 @@ dependencies {
     //工具类
     compile 'org.apache.commons:commons-lang3:3.4'
     compile project(':apphx')
+
+
 }
