@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>EventBus3.0使用说明</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>EventBus使用详解(一)——EventBus核心内容</h1>
+<h2>目录</h2>
+<ol>
+<li>概述</li>
+<li>
+实战
+<ol>
+<li>基本框架搭建</li>
+<li>新建一个类FirstEvent</li>
+<li>在要接收消息的页面注册EventBus</li>
+<li>发送消息</li>
+<li>接收消息</li>
+</ol>
+</li>
+</ol>
+<h3>一、概述</h3>
+<p>当一个Android应用功能越来越多的时候，保证应用的各个部分之间高效的通信将变得越来越困难。所以为了解决这个问题，EventBus应运而生！</p>
+<p>EventBus是一款针对Android优化的发布/订阅事件总线。主要功能是替代Intent,Handler,BroadCast在Fragment，Activity，Service，线程之间传递消息.优点是开销小，代码更优雅，它简化了组件之间的通信，使我们的应用程序更加简单、通信更加快捷。我们来看EventBus的消息传递图：</p>
+<p><img src="https://github.com/greenrobot/EventBus/raw/master/EventBus-Publish-Subscribe.png" /></p>
+<p>EventBus事件主线由四大部分组成：</p>
+<p>Publisher发布者：用于分发我们的Event事件，在EventBus中通过post方法进行分发传送。</p>
+<p>Subscriber订阅者：用于接受我们的事件，我们在订阅事件中处理我们接收的数据。</p>
+<p>Event事件：任何一个对象都可以作为事件，比如任何字符串，事件是发布者和订阅者之间的通信载体。</p>
+<p>EventBus：类似于中转站，将我们的事件进行对应的分发处理。</p>
+<p>举个通俗点的例子，EventBus消息机制就是我们生活中的寄快递，你去快递站点寄快递，你就是事件发送者，你的包裹就是事件，快递站点就是EventBus，接收快递的人就是事件订阅者。快递公司经过装车分类最后把你的快递寄到收件人手里，就类似EventBus最后将事件成功传达。</p>
+<h4>1、下载EventBus的类库</h4>
+<p>源码：<a href="https://github.com/greenrobot/EventBus.git">https://github.com/greenrobot/EventBus.git</a></p>
+<h4>2、基本使用</h4>
+<p>(1)首先需要定义一个消息类，该类可以不继承任何基类也不需要实现任何接口</p>
+<pre><code>public class MessageEvent {
+     ......
+ }
+</code></pre>
+
+<p>(2)在需要订阅事件的地方注册事件</p>
+<pre><code>EventBus.getDefault().register(this);
+</code></pre>
+
+<p>(3)产生事件，即发送消息</p>
+<pre><code>EventBus.getDefault().post(messageEvent);
+</code></pre>
+
+<p>(4)处理消息</p>
+<p>在3.0之前，EventBus还没有使用注解方式。消息处理的方法也只能限定于onEvent、onEventMainThread、onEventBackgroundThread和onEventAsync，分别代表四种线程模型。而在3.0之后，消息处理的方法可以随便取名，但是需要添加一个注解@Subscribe，并且要指定线程模型（默认为POSTING），四种线程模型，下面会讲到。</p>
+<p>注意，事件处理函数的访问权限必须为public，否则会报异常。</p>
+<pre><code>@Subscribe(threadMode = ThreadMode.POSTING)
+public void XXX(MessageEvent messageEvent){
+    ... 
+}
+</code></pre>
+
+<p>(5)取消消息订阅</p>
+<pre><code>EventBus.getDefault().unregister(this);
+</code></pre>
+
+<h3>二.实战</h3>
+<p>先给大家看个例子：</p>
+<p>当击btn_try按钮的时候，跳到第二个Activity，当点击第二个activity上面的First Event按钮的时候向第一个Activity发送消息，当第一个Activity收到消息后，一方面将消息Toast显示，一方面放入textView中显示。</p>
+<p><img src="http://7xsct4.com1.z0.glb.clouddn.com/16-3-28/47113240.jpg" /></p>
+<h4>1、基本框架搭建</h4>
+<p>想必大家从一个Activity跳转到第二个Activity的程序应该都会写，这里先稍稍把两个Activity跳转的代码建起来。后面再添加EventBus相关的玩意。</p>
+<h5>MainActivity布局（activity_main.xml）</h5>
+<pre><code>&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;  
+    android:orientation=&quot;vertical&quot;&gt;  
+
+&lt;Button   
+    android:id=&quot;@+id/btn_try&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;wrap_content&quot;  
+    android:text=&quot;btn_bty&quot;/&gt;  
+&lt;TextView   
+    android:id=&quot;@+id/tv&quot;  
+    android:layout_width=&quot;wrap_content&quot;  
+    android:layout_height=&quot;match_parent&quot;/&gt;  
+
+&lt;/LinearLayout&gt;  
+</code></pre>
+
+<h5>新建一个Activity，SecondActivity布局（activity_second.xml）</h5>
+<pre><code>&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;  
+    android:orientation=&quot;vertical&quot;  
+    tools:context=&quot;com.harvic.try_eventbus_1.SecondActivity&quot; &gt;  
+
+&lt;Button   
+    android:id=&quot;@+id/btn_first_event&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;wrap_content&quot;  
+    android:text=&quot;First Event&quot;/&gt;  
+
+&lt;/LinearLayout&gt;  
+</code></pre>
+
+<h5>MainActivity.java （点击btn跳转到第二个Activity）</h5>
+<pre><code>public class MainActivity extends Activity {  
+
+    Button btn;  
+
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+
+        btn = (Button) findViewById(R.id.btn_try);  
+
+        btn.setOnClickListener(new View.OnClickListener() {  
+
+        @Override  
+        public void onClick(View v) {  
+            // TODO Auto-generated method stub  
+            Intent intent = new Intent(getApplicationContext(),  
+            SecondActivity.class);  
+            startActivity(intent);  
+        }  
+        });  
+    }  
+
+}  
+</code></pre>
+
+<p>到这，基本框架就搭完了，下面开始按步骤使用EventBus了。</p>
+<h4>2、新建一个消息事件类MessageEvent</h4>
+<pre><code>public class MessageEvent {
+
+    private String message;
+
+    public MessageEvent(String message) {
+        this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+}  
+</code></pre>
+
+<p>这个类很简单，构造时传进去一个字符串，然后可以通过getMessage()获取出来。</p>
+<h4>3、在要接收消息的页面注册EventBus：</h4>
+<p>在上面的GIF图片的演示中，大家也可以看到，我们是要在MainActivity中接收发过来的消息的，所以我们在MainActivity中注册消息。</p>
+<p>通过我们会在OnCreate()函数中注册EventBus，在OnDestroy（）函数中反注册。所以整体的注册与反注册的代码如下：  </p>
+<pre><code>public class MainActivity extends Activity {  
+
+    Button btn;  
+    TextView tv;  
+
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+        //注册EventBus  
+        EventBus.getDefault().register(this);  
+
+        btn = (Button) findViewById(R.id.btn_try);  
+        tv = (TextView)findViewById(R.id.tv);  
+
+        btn.setOnClickListener(new View.OnClickListener() {  
+
+        @Override  
+        public void onClick(View v) {  
+            // TODO Auto-generated method stub  
+            Intent intent = new Intent(getApplicationContext(),  
+            SecondActivity.class);  
+            startActivity(intent);  
+            }  
+            });  
+        }  
+    @Override  
+    protected void onDestroy(){  
+        super.onDestroy();  
+        EventBus.getDefault().unregister(this);//反注册EventBus  
+    }  
+}  
+</code></pre>
+
+<h4>4、发送消息</h4>
+<p>发送消息是使用EventBus中的Post方法来实现发送的，发送过去的是我们新建的类的实例！</p>
+<pre><code>EventBus.getDefault().post(new MessageEvent(&quot;Btn clicked&quot;));  
+</code></pre>
+
+<p>完整的SecondActivity.java的代码如下：</p>
+<pre><code>package com.example.tryeventbus_simple;  
+
+import com.harvic.other.FirstEvent;  
+
+import de.greenrobot.event.EventBus;  
+import android.app.Activity;  
+import android.os.Bundle;  
+import android.view.View;  
+import android.widget.Button;  
+
+public class SecondActivity extends Activity {  
+    private Button btn_FirstEvent;  
+
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_second);  
+        btn_FirstEvent = (Button) findViewById(R.id.btn_first_event);  
+
+        btn_FirstEvent.setOnClickListener(new View.OnClickListener() {  
+
+        @Override  
+        public void onClick(View v) {  
+        // TODO Auto-generated method stub  
+        EventBus.getDefault().post(  
+        new FirstEvent(&quot;FirstEvent btn clicked&quot;));  
+        }  
+        });  
+    }  
+}  
+</code></pre>
+
+<h4>5、接收消息</h4>
+<p>接收消息时，我们使用EventBus中最常用的ThreadMode.MAIN线程模式来接收消息，具体为什么用这个，我们下篇再讲，这里先给大家一个初步认识，要先能把EventBus用起来先。
+在MainActivity中声明一个公共的加注释的方法，参数就是我们自己定义的类：</p>
+<p>在收到Event实例后，我们将其中携带的消息取出，一方面Toast出去，一方面传到TextView中；</p>
+<pre><code>@Subscribe(threadMode = ThreadMode.MAIN)
+public void onEventMainThread(MessageEvent event) {  
+
+String msg = &quot;onEventMainThread收到了消息：&quot; + event.getMessage();  
+Log.d(&quot;EventBus&quot;, msg);  
+tv.setText(msg);  
+Toast.makeText(this, msg, Toast.LENGTH_LONG).show();  
+}  
+</code></pre>
+
+<p>完整的MainActiviy代码如下：</p>
+<pre><code>public class MainActivity extends AppCompatActivity {
+
+    Button mBtn;
+    TextView mTv;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        EventBus.getDefault().register(this);//注册EventBus
+
+        mBtn = (Button) findViewById(R.id.main_btn);
+        mTv = (TextView) findViewById(R.id.main_tv);
+
+        mBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(getApplicationContext(),SecondActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(MessageEvent event) {
+        String msg = &quot;onEventMainThread收到了消息：&quot; + event.getMessage();
+        Log.d(&quot;EventBus&quot;, msg);
+        mTv.setText(msg);
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+}
+</code></pre>
+
+<h1>EventBus使用详解(二)——EventBus拓展内容</h1>
+<h2>线程模型</h2>
+<p>在EventBus的事件处理函数中需要指定线程模型，即指定事件处理函数运行所在的想线程。在上面我们已经接触到了EventBus的四种线程模型。那他们有什么区别呢？
+在EventBus中的观察者通常有四种线程模型，分别是PostThread（默认）、MainThread、BackgroundThread与Async。</p>
+<ul>
+<li>POSTING：如果使用事件处理函数指定了线程模型为PostThread，那么该事件在哪个线程发布出来的，事件处理函数就会在这个线程中运行，也就是说发布事件和接收事件在同一个线程。在线程模型为PostThread的事件处理函数中尽量避免执行耗时操作，因为它会阻塞事件的传递，甚至有可能会引起ANR。</li>
+<li>MAIN：如果使用事件处理函数指定了线程模型为MainThread，那么不论事件是在哪个线程中发布出来的，该事件处理函数都会在UI线程中执行。该方法可以用来更新UI，但是不能处理耗时操作。</li>
+<li>BACKGROUND：如果使用事件处理函数指定了线程模型为BackgroundThread，那么如果事件是在UI线程中发布出来的，那么该事件处理函数就会在新的线程中运行，如果事件本来就是子线程中发布出来的，那么该事件处理函数直接在发布事件的线程中执行。在此事件处理函数中禁止进行UI更新操作。</li>
+<li>ASYNC：如果使用事件处理函数指定了线程模型为Async，那么无论事件在哪个线程发布，该事件处理函数都会在新建的子线程中执行。同样，此事件处理函数中禁止进行UI更新操作。</li>
+</ul>
+<p>为了验证以上四个方法，我写了个小例子。</p>
+<pre><code>@Subscribe(threadMode = ThreadMode.POSTING)
+public void onMessageEventPostThread(MessageEvent messageEvent) {
+    Log.e(&quot;POSTING&quot;, Thread.currentThread().getName());
+}
+
+@Subscribe(threadMode = ThreadMode.MAIN)
+public void onMessageEventMainThread(MessageEvent messageEvent) {
+    Log.e(&quot;MAIN&quot;, Thread.currentThread().getName());
+}
+
+@Subscribe(threadMode = ThreadMode.BACKGROUND)
+public void onMessageEventBackgroundThread(MessageEvent messageEvent) {
+    Log.e(&quot;BACKGROUND&quot;, Thread.currentThread().getName());
+}
+
+@Subscribe(threadMode = ThreadMode.ASYNC)
+public void onMessageEventAsync(MessageEvent messageEvent) {
+    Log.e(&quot;ASYNC&quot;, Thread.currentThread().getName());
+}
+</code></pre>
+
+<p>分别使用上面四个方法订阅同一事件，打印他们运行所在的线程。首先我们在UI线程中发布一条MessageEvent的消息，看下日志打印结果是什么。</p>
+<pre><code>findViewById(R.id.send).setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Log.e(&quot;POSTING&quot;, Thread.currentThread().getName());
+            EventBus.getDefault().post(new MessageEvent(“test”));
+        }
+    });
+</code></pre>
+
+<p>打印结果如下：</p>
+<pre><code>09-26 08:18:31.361 6627-6627/com.example.administrator.explain_eventbus E/POSTING: main
+09-26 08:18:31.361 6627-6687/com.example.administrator.explain_eventbus E/ASYNC: pool-1-thread-1
+09-26 08:18:31.365 6627-6627/com.example.administrator.explain_eventbus E/MAIN: main
+09-26 08:18:31.365 6627-6627/com.example.administrator.explain_eventbus E/POSTING: main
+09-26 08:18:31.365 6627-6688/com.example.administrator.explain_eventbus E/BACKGROUND: pool-1-thread-2
+</code></pre>
+
+<p>从日志打印结果可以看出，如果在UI线程中发布事件，则线程模型为POSTING的事件处理函数也执行在UI线程，与发布事件的线程一致。线程模型为ASYNC的事件处理函数执行在名字叫做pool-1-thread-1的新的线程中。而MAIN的事件处理函数执行在UI线程，BACKGROUND的事件处理函数执行在名字叫做pool-1-thread-2的新的线程中。</p>
+<p>我们再看看在子线程中发布一条MessageEvent的消息时，会有什么样的结果。</p>
+<pre><code>findViewById(R.id.send).setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.e(&quot;POSTING&quot;, Thread.currentThread().getName());
+                    EventBus.getDefault().post(new MessageEvent(“test”));
+                }
+            }).start();
+        }
+    });
+</code></pre>
+
+<p>打印结果如下：</p>
+<pre><code>09-26 08:27:24.705 12468-14509/com.example.administrator.explain_eventbus E/POSTING: Thread-120
+09-26 08:27:24.705 12468-14447/com.example.administrator.explain_eventbus E/ASYNC: pool-1-thread-1
+09-26 08:27:24.709 12468-14509/com.example.administrator.explain_eventbus E/BACKGROUND: Thread-120
+09-26 08:27:24.709 12468-14509/com.example.administrator.explain_eventbus E/POSTING: Thread-120
+09-26 08:27:24.721 12468-12468/com.example.administrator.explain_eventbus E/MAIN: main
+</code></pre>
+
+<p>从日志打印结果可以看出，如果在子线程中发布事件，则线程模型为POSTING的事件处理函数也执行在子线程，与发布事件的线程一致（都是Thread-120）。BACKGROUND事件模型也与发布事件在同一线程执行。ASYNC则在一个名叫pool-1-thread-1的新线程中执行。MAIN还是在UI线程中执行。</p>
+<p>上面一个例子充分验证了指定不同线程模型的事件处理方法执行所在的线程。</p>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
