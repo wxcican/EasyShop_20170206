@@ -1,0 +1,32 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 23
+    //noinspection GradleDependency
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        minSdkVersion 15
+        //noinspection OldTargetApi
+        targetSdkVersion 22 // 注意，如果设置成23，需要处理运行时权限
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    //noinspection GradleDependency
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.jakewharton.timber:timber:4.2.0'
+    compile project(':easeui')
+    compile 'com.google.code.gson:gson:2.7'
+}

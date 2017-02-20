@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/menu_delete_conversation"
+          android:title="@string/hx_conversation_delete_conversation"/>
+    <item android:id="@+id/menu_delete_conversation_and_message"
+          android:title="@string/hx_conversation_delete_conversation_and_message"/>
+
+</menu>

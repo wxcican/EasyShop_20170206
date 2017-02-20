@@ -1,0 +1,42 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="app_name">App Hx</string>
+
+    <string name="hx_contact_error_delete_contact">删除好友失败：%s</string>
+    <string name="hx_contact_delete_contact">删除好友</string>
+    <string name="hx_contact_new_friends">添加新朋友</string>
+    <string name="hx_contact_invitation_and_notification">邀请和通知</string>
+    <string name="hx_contact_search_title">搜索好友</string>
+    <string name="hx_contact_search_hint">请输入用户名</string>
+    <string name="hx_contact_search_provider_authority">com.feicuiedu.apphx.HxSearchContactProvider</string>
+    <string name="hx_contact_clear_search_history">清除搜索历史</string>
+    <string name="hx_contact_error_search">搜索好友失败：%s</string>
+    <string name="hx_contact_add_contact">添加为好友</string>
+    <string name="hx_contact_send_invite_success">发送邀请成功</string>
+    <string name="hx_contact_send_invite_fail">发送邀请失败</string>
+    <string name="hx_contact_already_is_friend">已经是好友！</string>
+    <string name="hx_contact_invitation_reason">邀请您为好友</string>
+    <string name="hx_contact_invitation_accept">接受了您的请求</string>
+    <string name="hx_contact_invitation_agreed">已同意</string>
+    <string name="hx_contact_invitation_agree">同意</string>
+    <string name="hx_contact_invitation_refused">已拒绝</string>
+    <string name="hx_contact_invitation_refuse">拒绝</string>
+    <string name="hx_contact_action_fail">操作失败</string>
+
+    <string name="hx_chat_title">聊天</string>
+    <string name="hx_chat_video_call">视频通话</string>
+    <string name="hx_chat_audio_call">语音通话</string>
+    <string name="hx_chat_title_location_info">位置信息</string>
+
+    <string name="hx_conversation_delete_conversation">删除会话</string>
+    <string name="hx_conversation_delete_conversation_and_message">删除会话和消息</string>
+
+    <string name="hx_call_mute">静音</string>
+    <string name="hx_call_hands_free">免提</string>
+    <string name="hx_call_hang_up">挂断</string>
+    <string name="hx_call_answer">接听</string>
+
+    <string name="hx_error_account_conflict">账号冲突！</string>
+    <string name="hx_error_account_removed">账号被删除！</string>
+
+    <string name="hx_notify_expression">[表情]</string>
+</resources>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:ignore="ContentDescription">
+
+    <LinearLayout
+        android:id="@+id/layout_add_contacts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/lay_4"
+        android:background="?attr/selectableItemBackground">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/hx_add_contacts_bg"
+            android:scaleType="centerInside"
+            android:src="@drawable/hx_ic_add_contacts"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/lay_4"
+            android:gravity="center_vertical"
+            android:text="@string/hx_contact_new_friends"/>
+
+    </LinearLayout>
+
+    <View android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@android:drawable/divider_horizontal_bright"
+          android:paddingLeft="@dimen/lay_4"
+          android:paddingRight="@dimen/lay_4"/>
+
+    <LinearLayout
+        android:id="@+id/layout_notifications"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/lay_4"
+        android:background="?attr/selectableItemBackground">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/hx_notifications_bg"
+            android:scaleType="centerInside"
+            android:src="@drawable/hx_ic_notifications"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/lay_4"
+            android:gravity="center_vertical"
+            android:text="@string/hx_contact_invitation_and_notification"/>
+    </LinearLayout>
+
+</LinearLayout>

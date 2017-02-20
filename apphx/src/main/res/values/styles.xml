@@ -1,0 +1,44 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="HxAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- 用于搜索联系人页面，更改默认的搜索框效果-->
+    <style name="HxSearchTheme" parent="HxAppTheme">
+        <item name="autoCompleteTextViewStyle">@style/HxAutoCompleteTextViewStyle</item>
+        <item name="textAppearanceSearchResultTitle">@style/HxSearchResult</item>
+    </style>
+
+    <!-- 参见 http://www.tbenze.com/how-to-style-searchview-sugesstion-list/ -->
+    <style name="HxAutoCompleteTextViewStyle" parent="Widget.AppCompat.Light.AutoCompleteTextView">
+        <item name="android:popupBackground">@android:color/white</item>
+    </style>
+
+    <!-- 参见 http://www.tbenze.com/how-to-style-searchview-sugesstion-list/ -->
+    <style name="HxSearchResult" parent="TextAppearance.AppCompat.SearchResult.Title">
+        <item name="android:textColor">@color/selector_common_text</item>
+    </style>
+
+    <style name="HxActionBarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <!-- 改变选项菜单的背景颜色 -->
+        <item name="android:itemBackground">@android:color/white</item>
+        <!-- 改变选项菜单的字体 -->
+        <item name="android:itemTextAppearance">@style/HxMenuTextAppearance</item>
+    </style>
+
+    <style name="HxMenuTextAppearance" parent="style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/selector_common_text</item>
+    </style>
+
+    <style name="InvitationButtonStyle" parent="@style/Widget.AppCompat.Button">
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:background">@drawable/btn_invitation_bg</item>
+    </style>
+
+</resources>

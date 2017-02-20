@@ -1,0 +1,101 @@
+<manifest package="com.feicuiedu.apphx"
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- *********环信需要的权限:开始********* -->
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <!-- *********环信需要的权限:结束********* -->
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <application
+        android:name=".HxBaseApplication"
+        android:label="@string/app_name">
+
+        <!-- *********环信相关配置:开始********* -->
+        <!-- 设置环信应用的AppKey -->
+        <meta-data android:name="EASEMOB_APPKEY" android:value="hua1989#hua"/>
+        <!-- 声明环信所需的service SDK核心功能-->
+        <service android:name="com.hyphenate.chat.EMChatService" android:exported="true"
+                 tools:ignore="ExportedService"/>
+
+        <!-- 声明S环信所需的receiver -->
+        <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                <data android:scheme="package"/>
+            </intent-filter>
+        </receiver>
+        <!-- *********环信相关配置:结束********* -->
+
+        <!-- 搜索联系人页面 -->
+        <activity android:name=".presentation.contact.search.HxSearchContactActivity"
+                  android:launchMode="singleTop"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/HxSearchTheme">
+            <meta-data android:name="android.app.searchable"
+                       android:resource="@xml/searchable"/>
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+        </activity>
+
+        <!-- 邀请和通知页面-->
+        <activity android:name=".presentation.contact.invitation.HxInvitationsActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/HxAppTheme"/>
+
+        <!-- 聊天页面 -->
+        <activity android:name=".presentation.chat.HxChatActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/HxAppTheme"/>
+
+        <!-- 显示下载大图页面 -->
+        <activity
+            android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"/>
+
+        <activity android:name=".presentation.call.voice.HxVoiceCallActivity"
+                  android:screenOrientation="portrait"/>
+
+        <!-- *********地图相关功能:开始********* -->
+        <!-- 地图页面，用于分享位置-->
+        <activity android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/HxAppTheme"/>
+
+        <!-- 百度地图所需的service -->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote"/>
+
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="ETDCKMez4L3WMj5F80jIx7HyA0UGLZTk"/>
+        <!-- *********地图相关功能:结束********* -->
+
+        <!-- 搜索建议内容提供者 -->
+        <provider android:name=".presentation.contact.search.HxSearchContactProvider"
+                  android:authorities="@string/hx_contact_search_provider_authority"
+                  android:exported="false"/>
+
+
+        <service android:name=".HxMainService"/>
+
+    </application>
+
+</manifest>

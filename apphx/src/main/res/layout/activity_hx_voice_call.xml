@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/spruce"
+              android:orientation="vertical"
+              android:padding="@dimen/lay_16"
+              tools:ignore="ContentDescription,Overdraw,RelativeOverlap,RtlHardCoded">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_call_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/pale_white"
+            android:textSize="@dimen/font_22"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="2"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/image_avatar"
+            android:layout_width="@dimen/size_60"
+            android:layout_height="@dimen/size_60"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ease_default_avatar"/>
+
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/lay_10"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_20"
+            tools:text="username"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="2">
+
+        <TextView
+            android:id="@+id/text_mute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/lay_40"
+            android:layout_toLeftOf="@+id/midpoint"
+            android:drawablePadding="@dimen/lay_4"
+            android:drawableTop="@drawable/btn_call_mute"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:text="@string/hx_call_mute"
+            android:textColor="@color/grey"/>
+
+        <TextView
+            android:id="@+id/text_hands_free"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/lay_40"
+            android:layout_toRightOf="@+id/midpoint"
+            android:drawablePadding="@dimen/lay_4"
+            android:drawableTop="@drawable/btn_call_speaker"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:text="@string/hx_call_hands_free"
+            android:textColor="@color/grey"/>
+
+        <Space
+            android:id="@+id/midpoint"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"/>
+
+        <Button
+            android:id="@+id/button_refuse"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_60"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="@dimen/lay_10"
+            android:layout_toLeftOf="@+id/midpoint"
+            android:background="@drawable/btn_call_hangup_bg"
+            android:onClick="onClick"
+            android:text="@string/hx_call_hang_up"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_20"/>
+
+        <Button
+            android:id="@+id/button_answer"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_60"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/lay_10"
+            android:layout_toRightOf="@+id/midpoint"
+            android:background="@drawable/btn_call_answer_bg"
+            android:onClick="onClick"
+            android:text="@string/hx_call_answer"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_20"/>
+
+        <Button
+            android:id="@+id/button_hangup"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_60"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/lay_10"
+            android:background="@drawable/btn_call_hangup_bg"
+            android:onClick="onClick"
+            android:text="@string/hx_call_hang_up"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_20"
+            android:visibility="invisible"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

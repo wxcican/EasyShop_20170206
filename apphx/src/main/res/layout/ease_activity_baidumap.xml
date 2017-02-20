@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   更改地图界面的效果，用自定义的布局覆盖EaseUI中的布局。
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="RtlHardcoded">
+
+    <com.feicuiedu.apphx.presentation.chat.map.HxMapToolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_location_send"
+            style="?attr/actionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:enabled="false"
+            android:onClick="sendLocation"
+            android:text="@string/button_send"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_16"/>
+    </com.feicuiedu.apphx.presentation.chat.map.HxMapToolbar>
+
+    <!-- 以下是EaseUI中的原始布局 -->
+    <!-- <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_top_bar"
+        android:background="@color/top_bar_normal_bg"
+        android:gravity="center_vertical">
+
+        <include
+            layout="@layout/ease_commom_back_btn"
+        />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/location_message"
+            android:textColor="#ffffff"
+            android:textSize="18sp"/>
+
+
+        <Button
+            android:id="@+id/btn_location_send"
+            android:layout_width="52dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ease_common_tab_bg"
+            android:enabled="false"
+            android:onClick="sendLocation"
+            android:text="@string/button_send"
+            android:textColor="#fff"
+            android:textSize="17sp"/>
+
+    </RelativeLayout> -->
+
+    <com.baidu.mapapi.map.MapView android:id="@+id/bmapView"
+                                  android:layout_width="fill_parent"
+                                  android:layout_height="fill_parent"
+                                  android:background="#fff"
+                                  android:clickable="true"
+    />
+
+</LinearLayout>
