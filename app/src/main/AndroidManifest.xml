@@ -34,7 +34,8 @@
         <activity android:name=".main.shop.details.GoodsDetailActivity" />
         <activity android:name=".main.shop.details.GoodsDetailInfoActivity" />
         <activity android:name=".main.me.persongoods.PersonGoodsActivity" />
-        <activity android:name=".main.me.goodsupload.GoodsUpLoadActivity"></activity>
+        <activity android:name=".main.me.goodsupload.GoodsUpLoadActivity" />
+        <activity android:name=".main.me.goodsupload.GoodsUpLoadImageShowActivity"></activity>
     </application>
 
 </manifest>
