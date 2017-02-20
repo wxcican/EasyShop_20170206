@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.FormBody;
@@ -200,6 +201,36 @@ public class EasyShopClient {
                 .post(requestBody)
                 .build();
 
+        return okHttpClient.newCall(request);
+    }
+
+    //查找好友
+    public Call getSearchUser(String nickname){
+        RequestBody requestBody = new FormBody.Builder()
+                .add("nickname",nickname)
+                .build();
+
+        Request request = new Request.Builder()
+                .url(EasyShopApi.BASE_URL + EasyShopApi.GET_USER)
+                .post(requestBody)
+                .build();
+        return okHttpClient.newCall(request);
+    }
+
+    //获取好友列表
+    public Call getUsers(List<String> ids) {
+        String names = ids.toString();
+        //清除list转换后的string中空格
+        names = names.replace(" ","");
+
+        RequestBody requestBody = new FormBody.Builder()
+                .add("name",names)
+                .build();
+
+        Request request = new Request.Builder()
+                .url(EasyShopApi.BASE_URL + EasyShopApi.GET_NAMES)
+                .post(requestBody)
+                .build();
         return okHttpClient.newCall(request);
     }
 }
